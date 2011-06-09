@@ -1,0 +1,23 @@
+<apex:page showHeader="false" standardStylesheets="false" contentType="text/cache-manifest" controller="HTML5CacheController">CACHE MANIFEST
+#rev 333
+{!URLFOR($Resource.HTML5Util, 'HTML5_Badge_512.png')}
+{!URLFOR($Resource.HTML5Util, 'json.js')}
+{!URLFOR($Resource.HTML5Util, 'base64.js')}
+{!URLFOR($Resource.HTML5Util, 'database.js')}
+{!URLFOR($Resource.HTML5Util, 'jcanvas.min.js')}
+
+{!URLFOR($Resource.jQuery, 'js/jquery-1.5.1.min.js')}
+{!URLFOR($Resource.jQuery, 'js/jquery-ui-1.8.11.custom.min.js')}
+
+{!URLFOR($Resource.HTML5Util, 'base64.js')}
+{!URLFOR($Resource.HTML5Util, 'database.js')}
+{!URLFOR($Resource.HTML5Util, 'jcanvas.min.js')}
+{!URLFOR($Resource.HTML5Util, 'jquery.mobile.min.css')}
+{!URLFOR($Resource.HTML5Util, 'jquery.min.js')}
+{!URLFOR($Resource.HTML5Util, 'jquery.mobile.min.js')}
+{!URLFOR($Resource.HTML5Util, 'jcanvas.min.js')}
+/apex/HTML5FancyWithOffline?cache={!currentCache}
+
+NETWORK:
+*
+</apex:page>

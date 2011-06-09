@@ -1,0 +1,105 @@
+<apex:page showHeader="false" standardStylesheets="false" controller="remoteTest" >
+<apex:composition template="HTML5Template" />
+<apex:define name="content">
+<style>
+	.ui-li { padding: 5px; cursor: default; }
+</style>
+<script>
+	function filterQuarks(spin,mass) {
+		remoteTest.filterQuarks(spin,mass,updateResults);
+	}
+	
+	function updateResults(result, event) {
+		
+		j$('#sizeOfUniverse').html(result.length);
+		j$('canvas.test').clearCanvas();
+		
+		var centerX = 650/2;
+		var centerY = 450/2;
+		var quad = 1;
+		for(var i = 0; i < result.length; i++) {
+			if(result[i].Spin__c <= 0.25) {
+				x = centerX + i;
+				y = centerY + i;
+			}
+			
+			else if(result[i].Spin__c <= 0.50) {
+				x = centerX + i;
+				y = centerY - i;
+			}
+			
+			else if(result[i].Spin__c <= 0.75) {
+				x = centerX - i;
+				y = centerY + i;
+			}
+			
+			else {
+				x = centerX - i;
+				y = centerY - i;
+			}
+			
+			j$('canvas.test').drawArc({
+				fillStyle: '#333',
+  				x: x, y: y,
+  				radius: result[i].Mass__c * 7.25,
+			});
+
+		}
+	}
+
+	j$(document).ready(filterQuarks(1.0,1.0));
+</script>
+<body> 
+
+<div data-role="page">
+	
+	<div data-role="header">
+		<h1>Known Universe</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		<div>
+			Spin Limit:
+			<select id="spinlimit" onchange="filterQuarks(j$('#spinlimit').val(),j$('#masslimit').val())">
+				<option>1.0</option>
+				<option>0.9</option>
+				<option>0.8</option>
+				<option>0.7</option>
+				<option>0.6</option>
+				<option>0.5</option>
+				<option>0.4</option>
+				<option>0.3</option>
+				<option>0.2</option>
+				<option>0.1</option>	
+			</select> <BR />
+			Mass Limit:
+			<select id="masslimit" onchange="filterQuarks(parseFloat(j$('#spinlimit').val()),parseFloat(j$('#masslimit').val()))">
+				<option>1.0</option>
+				<option>0.9</option>
+				<option>0.8</option>
+				<option>0.7</option>
+				<option>0.6</option>
+				<option>0.5</option>
+				<option>0.4</option>
+				<option>0.3</option>
+				<option>0.2</option>
+				<option>0.1</option>
+			</select> &nbsp;
+		</div>
+		<span id="sizeOfUniverse"></span> quarks found.	
+		<HR />
+		<canvas class="test" width="650" height="450" style="background-color: white; border: 1px solid black;"></canvas>
+	</div><!-- /content -->
+
+	<div data-role="footer">
+		<h4>Known Universe's Footer</h4>
+	</div><!-- /footer -->
+	
+</div><!-- /page -->
+
+</body>
+
+</apex:define>
+
+
+</apex:page>

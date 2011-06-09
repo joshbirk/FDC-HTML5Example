@@ -1,0 +1,67 @@
+<apex:page showHeader="false"  standardStylesheets="false" controller="HTML5Controller" >
+<apex:outputText escape="false" value="{!htmlTag}" />
+
+<!-- add mobile and canvas util -->
+<link rel="stylesheet" href="{!URLFOR($Resource.HTML5Util, 'jquery.mobile.min.css')}" />
+<script src="{!URLFOR($Resource.HTML5Util, 'jquery.min.js')}" ></script>
+<script src="{!URLFOR($Resource.HTML5Util, 'jquery.mobile.min.js')}" ></script>
+<script src="{!URLFOR($Resource.HTML5Util, 'jcanvas.min.js')}"></script>
+
+<apex:includeScript value="{!URLFOR($Resource.jQuery, 'js/jquery-1.5.1.min.js')}" />
+<apex:includeScript value="{!URLFOR($Resource.jQuery, 'js/jquery-ui-1.8.11.custom.min.js')}" />
+<link rel="stylesheet" href="{!URLFOR($Resource.jQuery, 'css/ui-lightness/jquery-ui-1.8.11.custom.min.css')}" />
+
+
+<apex:includeScript value="{!URLFOR($Resource.HTML5Util, 'json.js')}" />
+<apex:includeScript value="{!URLFOR($Resource.HTML5Util, 'database.js')}" />
+
+<script>
+ var dTime = 0;
+ var timing = false;
+ var IS_ONLINE = true;
+ var IS_READY = false;
+ j$ = jQuery.noConflict();
+ initDB();
+ if(window.applicationCache) { //if we're online, check to see if the cache is updated
+	if (window.applicationCache.status == window.applicationCache.UPDATEREADY) {
+		window.applicationCache.update();
+		window.applicationCache.swapCache();
+		}
+	}
+	
+ j$.ajaxSetup({
+            async: true,
+            cache: false,
+            context: $("#status"),
+            dataType: "json",
+            error: function (req, status, ex) {
+                console.log("Error: " + ex);
+                setIsOnline(false);
+            },
+            success: function (data, status, req) {
+                setIsOnline(true);
+            },
+            timeout: 2500,
+            type: "GET",
+            url: "{!URLFOR($Resource.HTML5Util, 'ping.js')}"
+        });
+j$.ajax();
+        
+function setIsOnline(online) {
+    if (online) {
+        IS_ONLINE = true;
+    }
+    else {
+        IS_ONLINE = false;
+    }
+
+    console.log("Online status: " + IS_ONLINE);
+    IS_READY = true;
+    console.log("Ready: " + IS_READY);
+}	
+
+	
+</script>
+<apex:insert name="content" />
+<apex:outputText escape="false" value="{!endHtmlTag}" />
+</apex:page>
