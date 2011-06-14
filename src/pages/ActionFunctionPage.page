@@ -1,4 +1,4 @@
-<apex:page showHeader="false" standardStylesheets="false" controller="remoteTest" 	>
+<apex:page showHeader="false" standardStylesheets="false" controller="HTML5RemoteExtensions" 	>
 <apex:composition template="HTML5Template" />
 
 <apex:define name="content">

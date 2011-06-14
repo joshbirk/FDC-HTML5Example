@@ -1,4 +1,4 @@
-<apex:page showHeader="false" standardStylesheets="false" controller="remoteTest" >
+<apex:page showHeader="false" standardStylesheets="false" controller="HTML5RemoteExtensions" >
 <apex:composition template="HTML5Template" />
 
 <apex:define name="content">
@@ -12,7 +12,7 @@
 			return;
 		}
 		if(IS_ONLINE) {
-			remoteTest.filterQuarks(j$('#spinlimit').val(),j$('#masslimit').val(),updateResults);
+			HTML5RemoteExtensions.filterQuarks(j$('#spinlimit').val(),j$('#masslimit').val(),updateResults);
 			}
 		else {
 			loadJSON('quarks', filterQuarksOffline);
@@ -55,10 +55,11 @@
 			return;
 		}
 		
-		if(result.length == 900 && IS_ONLINE) { // fresh results
+		if((workingRecords == null || workingRecords == 0) && IS_ONLINE) { // fresh results
 			saveRecords('quarks', result, setComplete);
 			trackProgress();
 		}
+		
 		j$('#sizeOfUniverse').html(result.length);
 		j$('canvas.test').clearCanvas();
 		
@@ -92,6 +93,16 @@
   				radius: result[i].Mass__c * 7.25,
 			});
 
+		}
+	}
+	
+	function clearDatabase() {
+		var p = confirm('Are you sure?');
+		if(p) {
+			filesDB.transaction(function (tx) {
+				tx.executeSql("DELETE FROM files");
+				j$("#savingUniverse").html('Offline quarks deleted.');
+			});
 		}
 	}
 
@@ -134,7 +145,7 @@
 				<option>0.1</option>
 			</select> &nbsp;
 		</div>
-		<span id="sizeOfUniverse"></span> quarks found.	<span id="savingUniverse"></span>
+		<span id="sizeOfUniverse"></span> quarks found.	<span id="savingUniverse"></span> <HR /><a href="javascript:clearDatabase()">Clear Data</a>
 		<HR />
 		<canvas class="test" width="650" height="450" style="background-color: white; border: 1px solid black;"></canvas>
 	</div><!-- /content -->

@@ -1,0 +1,48 @@
+<apex:page controller="HTML5RemoteExtensions">
+<H1>The Examples</H1><HR />
+These are insanely simple examples, using a generic set of object, quarks, as the data.  Each of these is capable of grabbing 
+quarks from the system, filtering them based on spin and mass, and then displaying them with a canvas based chart.
+<UL>
+
+<LI>
+<h2>Action Function Based Page (for comparison):</h2>
+<a href="/apex/ActionFunctionPage" target="_new">HTML5 Quark Graph</a>
+<P>This is just a page setup for comparison, using what prior to JavaScript Remoting was a common way to 
+integrate with jQuery - setting up JSON within a repeat tag</P>
+</LI>
+
+<LI>
+<h2>JavaScript Remote Version:</h2>
+<a href="/apex/HTML5QuarkGraph" target="_new">HTML5 Quark Graph</a>
+<P>Same page, just using JavaScript Remoting for the data transfer.  No viewstate, lightweight - it's generally about 
+3-4 times faster than the version above.</P>
+</LI>
+
+<LI>
+<h2>Offline Database (No Web Application Cache):</h2>
+<a href="/apex/HTML5QuarkGraphOffline" target="_new">HTML5 Quark Graph</a>
+<P>Here we've added calls in to a JavaScript utility library to handle storing the JSON into the offline database.
+The data will be stored by ID, have a name column that they can be associated with (like by record or object type), and then
+JSON data itself.  This library is still pretty nascent, but in this instance it will at least use the ID as the primary key
+and update existing records, as opposed to merely continually adding to the database.</P>
+</LI>
+
+<LI>
+<h2>Offline Database with Web Application Cache turned on:</h2>
+<a href="/apex/HTML5QuarkGraphOffline?cache=demo&page=HTML5QuarkGraphOffline" target="_new"	>HTML5 Quark Graph</a>
+<P>Same as above, but by adding in the "cache" and "page" query parameters, the HTML5 template will setup the
+HTML5 manifest page, include the page explicitly, and have the application itself stored offline.  Once done, Visualforce
+may be stubborn about updating the manifest, so to see changes to the app eitehr remove or change the cache param.</P>
+</LI>
+
+<P>
+If you want to quickly create test data, check out the Neutron Bomb class.  Or click here:
+<apex:form >
+	<apex:commandButton action="{!createTestData}" value="Create Test Data" status="status" oncomplete="alert('Created')"/>
+	<apex:commandButton action="{!deleteTestData}" value="Delete Test Data" status="status" oncomplete="alert('Deleted')" />
+</apex:form>
+</P>
+
+
+</UL>
+</apex:page>

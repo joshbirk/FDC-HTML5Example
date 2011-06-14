@@ -6,5 +6,6 @@ This is just a set of sample code for integrating Offline Databases and Web Appl
 The pages make reference to the "HTML5Util" static resource, which is the other directory of files here in addition to the Force.com src directory.
 </P>
 <P>
-I'll provide more readme.md's on a file by file basis at a later date.  For now, feel free to twitter me questions @joshbirk.
+To install this on your own org, you can use this link:
+https://login.salesforce.com/?ec=302&startURL=%2Fpackaging%2FinstallPackage.apexp%3Fp0%3D04tC0000000tio3
 </P>

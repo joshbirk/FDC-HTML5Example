@@ -1,4 +1,4 @@
-<apex:page showHeader="false" standardStylesheets="false" controller="remoteTest" >
+<apex:page showHeader="false" standardStylesheets="false" controller="HTML5RemoteExtensions" >
 <apex:composition template="HTML5Template" />
 <apex:define name="content">
 <style>
@@ -6,8 +6,9 @@
 </style>
 <script>
 	function filterQuarks(spin,mass) {
-		remoteTest.filterQuarks(spin,mass,updateResults);
+		HTML5RemoteExtensions.filterQuarks(spin,mass,updateResults);
 	}
+	
 	
 	function updateResults(result, event) {
 		
