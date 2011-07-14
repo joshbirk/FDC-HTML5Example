@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="600" minHeight="600" creationComplete="init()" >
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import flash.external.ExternalInterface;	
+			import mx.collections.ArrayCollection;
+			
+			private var filteredQuarks:ArrayCollection;
+			private var quarks:ArrayCollection;
+			
+			
+			public function init():void {
+				if (ExternalInterface.available) {
+					ExternalInterface.addCallback("sendData", getData);
+					filterResults();	
+				}
+			}
+			
+			public function getData(result:Array):void {
+				filteredQuarks = new ArrayCollection(result);
+				QuarkChart.dataProvider = filteredQuarks;
+			}
+			
+			private function filterResults():void {
+				ExternalInterface.call("filterQuarks", spinfilter.value, massfilter.value);
+			}
+			
+		]]>
+	</fx:Script>
+
+	<mx:PlotChart id="QuarkChart" x="15" y="102" width="734">
+		<mx:series>
+			<mx:PlotSeries displayName="Spin" yField="Spin__c"/>
+			<mx:PlotSeries displayName="Mass" yField="Mass__c"/>
+		</mx:series>
+	</mx:PlotChart>
+	<s:HSlider x="458" y="10" minimum="0.1" maximum="1.0" stepSize="0.1" value="1.0" id="spinfilter" changeEnd="filterResults()" />
+	<s:HSlider x="18" y="10" minimum="0.1" maximum="1.0" stepSize="0.1" value="1.0" id="massfilter" changeEnd="filterResults()" />
+	<s:Label x="32" y="51" text="Spin"/>
+	<s:Label x="470" y="60" text="Mass"/>
+
+	
+	
+</s:Application>
