@@ -10,3 +10,4 @@ To install this on your own org, you can use this link:
 <BR />
 <a href="https://login.salesforce.com/?ec=302&startURL=%2Fpackaging%2FinstallPackage.apexp%3Fp0%3D04tC0000000tio3">https://login.salesforce.com/?ec=302&startURL=%2Fpackaging%2FinstallPackage.apexp%3Fp0%3D04tC0000000tio3</a>
 </P>
+Or download here via Git.
