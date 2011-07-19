@@ -65,7 +65,7 @@ global with sharing class HTML5RemoteExtensions {
     	ApexPages.currentPage().getParameters().put('page','HTML5QuarkGraphOffline');
     	
     	HTML5Controller html5Controller = new HTML5Controller();
-    	System.assertEquals(html5Controller.htmlTag,'<html>');
+    	System.assertNotEquals(html5Controller.htmlTag,'<html>');
     	
     	HTML5CacheController html5cache = new HTML5CacheController();
     	
