@@ -10,4 +10,4 @@ To install this on your own org, you can use this link:
 <BR />
 <a href="https://login.salesforce.com/packaging/installPackage.apexp?p0=04tC0000000tip6">https://login.salesforce.com/packaging/installPackage.apexp?p0=04tC0000000tip6</a>
 </P>
-Or download here via Git.
+Or download here via Git, and <a href="http://blogs.developerforce.com/labs/2011/04/how-to-use-git-github-force-com-ide-open-source-labs-apps.html">see here on more about using Git with Force.com</a>.  This is actually recommended, so that you can get any small updates without having to go get the package again.
