@@ -23,7 +23,7 @@
  j$ = jQuery.noConflict();
  initDB();
  if(window.applicationCache) { //if we're online, check to see if the cache is updated
-	if (window.applicationCache.status == window.applicationCache.UPDATEREADY) {
+	if (window.applicationCache.status > 3) { //UPDATEREADY OR OBSOLETE.  KEEPS REMOTE CSRF SANITY.
 		window.applicationCache.update();
 		window.applicationCache.swapCache();
 		}
